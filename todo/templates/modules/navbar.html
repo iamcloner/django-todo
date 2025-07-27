@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
+    <div class="container-fluid p-2 px-4">
+        <a class="navbar-brand me-5" href="{% url 'home:home' %}">Todo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {{home_active}}" aria-current="page" href="{% url 'home:home' %}">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{about_active}}" aria-current="page" href="{% url 'home:about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{contact_active}}" aria-current="page" href="{% url 'home:contact' %}">Contact
+                        us</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0 d-flex">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link {{sections_active}}" aria-current="page" href="#">My sections</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{todos_active}}" aria-current="page" href="#">My todos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'authentication:logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link {{login_active}}" aria-current="page"
+                        href="{% url 'authentication:login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{register_active}}" aria-current="page"
+                        href="{% url 'authentication:register' %}">Register</a>
+                </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>

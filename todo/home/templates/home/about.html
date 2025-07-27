@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<style>
+    body {
+
+        height: 100vh;
+        background-image: url('https://logopond.com/logos/f05276685dd792ea181ae2b2231dd0ef.png');
+        background-size: 100% 100%;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-color: black;
+
+    }
+
+    .about-text {
+        justify-content: center;
+        width: 60%;
+    }
+
+    .descriptions {
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+        height: 80vh;
+
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <div class="descriptions">
+        <h4>About Us</h4>
+        <p class="about-text">Welcome to our To-Do platform — your simple, smart, and powerful way to stay organized.
+            Whether you're
+            planning your day, managing a big project, or just keeping track of small tasks, our platform is designed to
+            help you focus, prioritize, and get things done.
+
+            We believe productivity should be effortless. That’s why we’ve built an intuitive interface, customizable
+            features, and seamless syncing across all your devices — so you can stay in control, wherever you are.
+
+            Join thousands of users who rely on us every day to make their lives more organized, focused, and
+            productive. Let’s achieve more, together.</p>
+    </div>
+</div>
+{% endblock %}

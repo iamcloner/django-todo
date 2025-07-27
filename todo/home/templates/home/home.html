@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<style>
+    body {
+
+        height: 100vh;
+        background-image: url('https://logopond.com/logos/f05276685dd792ea181ae2b2231dd0ef.png');
+        background-size: 100% 100%;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-color: black;
+
+    }
+
+    .descriptions {
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: center;
+        height: 80vh;
+
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <div class="descriptions">
+        <h4>Create your first Todo here</h4>
+        <p>Join now and create your first todo for free.</p>
+        <a class="btn btn-primary" href="{% url 'authentication:register' %}">Join now</a>
+    </div>
+</div>
+{% endblock %}
