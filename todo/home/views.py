@@ -31,3 +31,14 @@ class ContactView(View):
             "contact_active": "active",
         }
         return render(request, self.template_name, data)
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+        data = {
+            "contact_form": form,
+            "title": "Contact Us | Todo",
+            "contact_active": "active",
+        }
+        return render(request, self.template_name, data)

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<style>
+    .color-circle {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-inline-start: 8px;
+        border: 1px solid #999;
+        vertical-align: middle;
+    }
+
+    .dropdown .dropdown-toggle,
+    .dropdown-menu {
+        text-align: left;
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card col-lg-5 col-md-6 m-5 bg-secondary">
+        <div class="card-header text-center">
+            <h3 class="m-1">New Section</h3>
+        </div>
+        <div class="card-body">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ section_form.as_p }}
+                <label for="colorDropdown">Color:</label>
+                <div class="dropdown">
+                    <button class="btn btn-dark dropdown-toggle " type="button" id="colorDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Choose a color ...
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="colorDropdown" id="colorList">
+                        {% for color in colors %}
+                        <li>
+                            <a class="dropdown-item" href="#" data-color="{{color.id}}">
+                                <span class="color-circle" style="background-color: #{{color.color}};"></span>
+                                {{color.name}}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <input type="hidden" name="color" id="colorInput">
+
+
+
+                <button type="submit" class="btn btn-primary w-100 mt-3">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const colorItems = document.querySelectorAll('.dropdown-item');
+    const dropdownButton = document.getElementById('colorDropdown');
+    const colorInput = document.getElementById('colorInput');
+
+
+    colorItems.forEach(item => {
+        item.addEventListener('click', function (e) {
+            e.preventDefault();
+            const colorId = this.getAttribute('data-color');
+            const colorName = this.textContent.trim();
+            const colorCircle = this.querySelector('.color-circle');
+            const colorValue = window.getComputedStyle(colorCircle).backgroundColor;
+            dropdownButton.innerHTML = ` 
+          <span class="color-circle" style="background-color: ${colorValue}; margin-inline-start: 8px;"></span>
+          ${colorName}`;
+            colorInput.value = colorId;
+        });
+    });
+</script>
+{% endblock %}

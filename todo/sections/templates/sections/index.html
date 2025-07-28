@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+
+    {% for section in sections %}
+
+    {% empty %}
+    <div class="alert alert-light text-center p-5" role="alert">
+        You not have any section.
+
+        <a href="{% url 'sections:add_section' %}" class="btn btn-primary">Make section</a>
+
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}
