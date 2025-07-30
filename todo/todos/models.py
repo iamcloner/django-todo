@@ -4,7 +4,7 @@ from sections.models import TodoSection
 
 class Todo(models.Model):
     section = models.ForeignKey(
-        TodoSection, on_delete=models.CASCADE, related_name="section"
+        TodoSection, on_delete=models.CASCADE, related_name="sections"
     )
     title = models.CharField(max_length=40)
     description = models.CharField()

@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+    {% for todo in todos %}
+        {{ todo.title }}
+        {{ todo.items|length }}
+    {% endfor %}
 {% endblock %}

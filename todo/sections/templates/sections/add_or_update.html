@@ -34,7 +34,13 @@
                 <div class="dropdown">
                     <button class="btn btn-dark dropdown-toggle " type="button" id="colorDropdown"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Choose a color ...
+
+                        {% if selected_color %}
+                            <span class="color-circle" style="background-color: #{{ selected_color.color }}"></span>
+                            {{ selected_color.name }}
+                        {% else %}
+                            Choose a color ...
+                        {% endif %}
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="colorDropdown" id="colorList">
                         {% for color in colors %}
@@ -48,11 +54,10 @@
                     </ul>
                 </div>
 
-                <input type="hidden" name="color" id="colorInput">
 
 
 
-                <button type="submit" class="btn btn-primary w-100 mt-3">Add</button>
+                <button type="submit" class="btn btn-primary w-100 mt-3">{{ action }}</button>
             </form>
         </div>
     </div>
@@ -77,6 +82,7 @@
           <span class="color-circle" style="background-color: ${colorValue}; margin-inline-start: 8px;"></span>
           ${colorName}`;
             colorInput.value = colorId;
+            console.log(colorInput.value)
         });
     });
 </script>

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card col-lg-5 col-md-6 m-5 bg-secondary">
+        <div class="card-header text-center">
+            <h3 class="m-1">Are you sure you want to delete this section?</h3>
+        </div>
+        <div class="card-body">
+            {{ section_info.title }}
+            {{ section_info.sections|length  }}
+        </div>
+        <div class="card-footer">
+            <form action="" method="post" class="d-flex gap-2">
+                {% csrf_token %}
+                <a href="{% url 'sections:sections' %}" class="btn btn-danger w-50">Cancel</a>
+                <button type="submit" class="btn btn-warning w-50">Delete</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

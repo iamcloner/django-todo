@@ -1,18 +1,59 @@
 {% extends 'base.html' %}
 
+{% block styles %}
+<style>
+    .color-circle {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-inline-start: 8px;
+        border: 1px solid #999;
+        vertical-align: middle;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container mt-5">
+    {% if sections %}
+    <div class="alert alert-dark mx-5" role="alert">
 
-    {% for section in sections %}
+        <div class="d-flex justify-content-between align-items-center">
 
-    {% empty %}
-    <div class="alert alert-light text-center p-5" role="alert">
-        You not have any section.
+            <a href="{% url 'sections:add_section' %}" class="btn btn-success"><i class="bi bi-file-earmark-plus"></i></a>
 
-        <a href="{% url 'sections:add_section' %}" class="btn btn-primary">Make section</a>
+            <form class="d-flex" role="search" method="get">
+                <input class="form-control me-2" style="max-width: 300px;" type="search" name="search"
+                    placeholder="Search" aria-label="Search" value="{{ search }}">
+                <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+            </form>
+        </div>
 
     </div>
-    {% endfor %}
+    {% endif %}
+    <div class="row gap-4  justify-content-center">
+        {% for section in sections %}
+        <div class="card col-md-2 text-center">
+            <div class="card-body">
 
+                <h5 class="card-title"><span style="background-color: #{{section.color.color}};"
+                        class="color-circle"></span> {{section.title}}</h5>
+                <hr>
+                <div class="d-flex gap-2 mt-3">
+                    <a href="{% url 'sections:edit_section' section.id %}" class="btn btn-primary w-50"><i class="bi bi-pencil-square"></i></a>
+                    <a href="{% url 'sections:delete_section' section.id %}" class="btn btn-danger w-50"><i class="bi bi-file-earmark-x"></i></a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-light text-center p-5" role="alert">
+            You not have any section.
+
+            <a href="{% url 'sections:add_section' %}" class="btn btn-primary">Make section</a>
+
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

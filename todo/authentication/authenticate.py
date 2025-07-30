@@ -1,10 +1,11 @@
+from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
 import re
 
 
-class EmailBackend:
-    def is_valid_email(email):
-        pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+class EmailBackend(ModelBackend):
+    def is_valid_email(self,email):
+        pattern = r"^(?!.*\.\.)(?!.*\.$)[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$"
         return re.match(pattern, email) is not None
 
     def authenticate(self, request, username=None, password=None):

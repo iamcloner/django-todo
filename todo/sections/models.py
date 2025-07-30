@@ -8,9 +8,10 @@ class Color(models.Model):
 
 
 class TodoSection(models.Model):
+
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
     title = models.CharField(max_length=40)
-    created = models.DateTimeField(auto_created=True)
+    created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     color = models.ForeignKey(
         Color, on_delete=models.SET_NULL, null=True, related_name="tcolor"

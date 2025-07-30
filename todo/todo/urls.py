@@ -25,4 +25,5 @@ urlpatterns = [
     path("", include("home.urls", namespace="home")),
     path("auth/", include("authentication.urls", namespace="authentication")),
     path("sections/", include("sections.urls", namespace="sections")),
+    path("todos/", include("todos.urls", namespace="todos")),
 ]
