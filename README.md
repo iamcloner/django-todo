@@ -1,6 +1,6 @@
 A simple Todo application built with Django for managing daily tasks.
 
-Other language documantion : [Persian] (https://github.com/iamcloner/django-todo/blob/main/README-FA.md)
+Other language documantion : [Persian](https://github.com/iamcloner/django-todo/blob/main/README-FA.md)
 
 ## 📌 Features
  - Create, edit, and delete tasks
