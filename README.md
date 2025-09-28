@@ -10,9 +10,9 @@ Other language documantion : [Persian](https://github.com/iamcloner/django-todo/
 
 ## ⚙️ Requirements
 To run this project, you need:
-Python 3.8 or higher
-Django 3.2 or higher
-SQLite database (default)
+ - Python 3.8 or higher
+ - Django 3.2 or higher
+ - SQLite database (default)
 
 ## 🚀 Setup Instructions
 Clone the repository:
