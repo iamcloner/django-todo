@@ -1,8 +1,80 @@
 {% extends 'base.html' %}
 
+{% block styles %}
+    <style>
+        .color-circle {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-inline-start: 8px;
+            border: 1px solid #999;
+            vertical-align: middle;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
-    {% for todo in todos %}
-        {{ todo.title }}
-        {{ todo.items|length }}
-    {% endfor %}
+    <div class="container my-3">
+        <div class="row gap-3 justify-content-center">
+            {% for section in sections %}
+                <div class="row">
+                    <div class="card col-md-12">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5 class="card-title pt-2">
+                                        <span style="background-color: #{{ section.color }};"
+                                              class="color-circle"></span> {{ section.title }}
+                                    </h5>
+                                </div>
+                                <div class=" gap-2 text-end col-6">
+                                    <a href="{% url 'todos:add_todo' section.id %}" class="btn btn-success"><i
+                                            class="bi bi-file-earmark-plus"></i></a>
+                                    <a href="{% url 'sections:edit_section' section.id %}" class="btn btn-primary"><i
+                                            class="bi bi-pencil-square"></i></a>
+                                    <a href="{% url 'sections:delete_section' section.id %}" class="btn btn-danger"><i
+                                            class="bi bi-file-earmark-x"></i></a>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row gap-2 justify-content-center">
+                                {% for todo in section.todos %}
+                                    <div class="card col-md-2 text-center">
+                                        <div class="card-body">
+
+                                            <h5 class="card-title">{{ todo.title }}</h5>
+                                            <hr>
+                                            <div class="d-flex gap-2 mt-3 justify-content-center">
+                                                <a href="{% url 'todos:details_todo' todo.id %}"
+                                                   class="btn btn-info w-50"><i class="bi bi-three-dots"></i></a>
+                                                <a href="{% url 'todos:edit_todo' todo.id %}"
+                                                   class="btn btn-primary w-50"><i class="bi bi-pencil-square"></i></a>
+                                                <a href="{% url 'todos:delete_todo' todo.id %}"
+                                                   class="btn btn-danger w-50"><i class="bi bi-file-earmark-x"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% empty %}
+                                    <div class="alert alert-light text-center p-5" role="alert">
+                                        You not have any Todo in this section.
+                                        <a href="{% url 'sections:add_section' %}" class="btn btn-primary">Make Todo</a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            {% empty %}
+                <div class="alert alert-light text-center p-5" role="alert">
+                    You not have any section.
+
+                    <a href="{% url 'sections:add_section' %}" class="btn btn-primary">Make section</a>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

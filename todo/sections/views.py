@@ -1,11 +1,9 @@
-from typing import Any
-
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import TodoSection, Color
+
 from .forms import TodoSectionForm
+from .models import TodoSection, Color
 
 
 class SectionsView(View):
@@ -40,7 +38,7 @@ class AddSectionView(View):
             "title": "Add Sections | Todo",
             "section_form": section_form,
             "colors": self.colors,
-            "action":"Add"
+            "action": "Add"
         }
         return render(request, self.template_name, data)
 
@@ -64,6 +62,7 @@ class AddSectionView(View):
         }
         messages.error(request, "Section could not be created. Please try again.", "danger")
         return render(request, self.template_name, data)
+
 
 class EditSectionView(View):
     template_name = "sections/add_or_update.html"
@@ -92,12 +91,12 @@ class EditSectionView(View):
             "section_form": section_form,
             "selected_color": self.section_instance.color,
             "colors": self.colors,
-            "action":"Edit"
+            "action": "Edit"
         }
         return render(request, self.template_name, data)
 
     def post(self, request, *args, **kwargs):
-        section_form = self.form_class(request.POST,instance=self.section_instance)
+        section_form = self.form_class(request.POST, instance=self.section_instance)
         if section_form.is_valid():
             new_section = section_form.save(commit=False)
             new_section.save()
@@ -115,13 +114,16 @@ class EditSectionView(View):
         messages.error(request, "Section could not be updated. Please try again.", "danger")
         return render(request, self.template_name, data)
 
+
 class DeleteSectionView(View):
     template_name = "sections/delete.html"
 
     section_instance = None
+    todos = None
 
     def setup(self, request, *args, **kwargs):
         self.section_instance = get_object_or_404(TodoSection, pk=kwargs['section_id'])
+        self.todos = self.section_instance.sections.all()
         return super().setup(request, *args, **kwargs)
 
     def dispatch(self, request, *args, **kwargs):
@@ -132,11 +134,11 @@ class DeleteSectionView(View):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-
         data = {
             "sections_active": "active",
-            "title": "Edit Sections | Todo",
-            "section_info": self.section_instance
+            "title": "Delete Sections | Todo",
+            "section_info": self.section_instance,
+            "section_todos": self.todos,
         }
         return render(request, self.template_name, data)
 

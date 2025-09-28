@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <style>
+        .color-circle {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-inline-start: 8px;
+            border: 1px solid #999;
+            vertical-align: middle;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container my-3">
+        <div class="row gap-3 justify-content-center">
+            <div class="row">
+                <div class="card col-md-12">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-title pt-2">
+                                    {{ todo_details.title }}
+                                </h5>
+                            </div>
+                            <div class=" gap-2 text-end col-6">
+                                <a href="{% url 'todos:edit_todo' todo_details.id %}" class="btn btn-primary"><i
+                                        class="bi bi-pencil-square"></i></a>
+                                <a href="{% url 'todos:delete_todo' todo_details.id %}" class="btn btn-danger"><i
+                                        class="bi bi-file-earmark-x"></i></a>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-12">
+                                Section :
+
+                                <span
+                                        style="background-color: #{{ todo_details.section.color.color }};"
+                                        class="color-circle mx-2"></span> {{ todo_details.section.title }}
+                            </div>
+                            <div class="col-12">
+                                Created at :
+
+                                {{ todo_details.created }} ({{ todo_details.created | timesince }} ago)
+                            </div>
+                            {% if todo_details.created != todo_details.updated %}
+                                <div class="col-12">
+                                    Updated at :
+
+                                    {{ todo_details.updated }} ({{ todo_details.updated | timesince }} ago)
+                                </div>
+                            {% endif %}
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-12 ">
+                                Description :
+
+                                {{ todo_details.description }}
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
